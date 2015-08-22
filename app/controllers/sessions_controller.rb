@@ -6,13 +6,14 @@ class SessionsController < ApplicationController
 
   def create
     @user = User.find_by_credentials(
-      params[:username],
-      params[:password]
+      params[:user][:username],
+      params[:user][:password]
     )
 
     if @user
       log_in_user!(@user)
-      render text: "Session Created #{@user.username}!"
+      flash[:notices] = ["Welcome back, #{@user.username}!"]
+      redirect_to subs_url
     else
       flash.now[:errors] = ["Invalid username or password."]
       render :new

@@ -7,6 +7,12 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
+<% if logged_in? %>
+  <form action="<%= session_url %>" method="post">
+    <%= hidden_delete %>
+    <%= current_user %><button>Logout</button>
+  </form>
+  <% end %>
 
 <%= yield %>
 

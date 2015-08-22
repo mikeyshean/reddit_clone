@@ -13,6 +13,12 @@ class User < ActiveRecord::Base
     foreign_key: :moderator_id
   )
 
+  has_many(
+    :posts,
+    class_name: "Post",
+    foreign_key: :author_id
+  )
+
   def self.generate_session_token
     SecureRandom.urlsafe_base64
   end
@@ -29,13 +35,18 @@ class User < ActiveRecord::Base
   end
 
   def password=(password)
-    @password = password
-
-    self.password_digest = BCrypt::Password.create(password)
+    if password.present?
+      @password = password
+      self.password_digest = BCrypt::Password.create(password)
+    end
   end
 
   def is_password?(password)
     BCrypt::Password.new(password_digest).is_password?(password)
+  end
+
+  def to_s
+    self.username.to_s
   end
 
   private

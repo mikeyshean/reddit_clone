@@ -23,7 +23,7 @@ class SubsController < ApplicationController
   end
 
   def edit
-    @sub = Sub.find(params[:id])
+    @sub = current_user.subs.find_by_id(params[:id])
   end
 
   def update
