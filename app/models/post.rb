@@ -13,4 +13,14 @@ class Post < ActiveRecord::Base
   def top_level_comments
     self.comments.where(parent_comment_id: nil)
   end
+
+  def comments_by_parent_id
+    result = Hash.new { |h,k| h[k] = [] }
+
+    self.comments.each do |comment|
+      result[comment.parent_comment_id] << comment
+    end
+
+    result
+  end
 end
