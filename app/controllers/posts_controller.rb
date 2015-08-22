@@ -3,7 +3,7 @@ class PostsController < ApplicationController
   before_action :require_author, only: [:edit, :update]
 
   def new
-    @post = Post.new
+    @post = Post.new(sub_ids: [params[:sub_id]])
     render :new
   end
 
