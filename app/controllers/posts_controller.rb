@@ -22,6 +22,21 @@ class PostsController < ApplicationController
     @post = Post.find(params[:id])
   end
 
+  def edit
+    @post = Post.find(params[:id])
+  end
+
+  def update
+    @post = Post.find(params[:id])
+
+    if @post.update(post_params)
+      redirect_to post_url(@post)
+    else
+      flash.now[:errors] = @post.errors.full_messages
+      render :edit
+    end
+  end
+
   private
 
   def post_params
@@ -30,7 +45,7 @@ class PostsController < ApplicationController
   end
 
   def require_author
-    @post = Post.find(params[:sub_id])
+    @post = Post.find(params[:id])
     redirect_to sub_url(@post) if current_user != @post.author
   end
 end

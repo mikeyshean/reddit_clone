@@ -1,37 +1,4 @@
 <h1>Submit a Post!</h1>
 <%= flash_messages %>
-  <form action="<%= posts_url %>" method="post">
-    <%= authenticity_token %>
-
-    <p><label for="post_title">Title:</label></p>
-    <input
-      type="text"
-      name="post[title]"
-      id="post_title"
-      value="<%= @post.title %>">
-    <br>
-
-    <p><label for="post_url">Link:</label></p>
-    <input
-      type="text"
-      name="post[url]"
-      id="post_url"
-      value="<%= @post.url %>">
-    <br>
-
-    <p>Select Subs:</p>
-    <% Sub.all.each do |sub| %>
-      <input
-        type="checkbox"
-        name="post[sub_ids][]"
-        value="<%= sub.id %>"
-        <%= "checked" if @post.sub_ids.include?(sub.id) %>>
-        <label><%= sub.title %></label><br>
-    <% end %>
-
-    <p><label for="post_content">Text (optional):</label></p>
-    <textarea name="post[content]" id="post_content"><%= @post.content %></textarea>
-
-    <p><button>Submit</button></p>
-  </form>
+<%= render "form", post: @post %>
   <%= back_to_frontpage %>
