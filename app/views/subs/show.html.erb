@@ -2,9 +2,15 @@
 <h4><%= @sub.description %></h4>
 <h4>Moderator: <%= @sub.moderator %></h4>
 
+<ul>
+  <% @sub.posts.each do |post| %>
+    <li><a href="<%= post_url(post) %>"><%= post.title %></a></li>
+  <% end %>
+</ul>
+
 <a href="<%= new_sub_post_url(@sub) %>">New Post</a><br>
 <% if @sub.moderator == current_user %>
   <a href="<%= edit_sub_url(@sub) %>">Edit</a><br>
 <% end %>
 
-<a href="<%= subs_url %>">Back to Frontpage</a><br>
+<%= back_to_frontpage %>

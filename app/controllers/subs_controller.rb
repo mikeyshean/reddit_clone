@@ -1,4 +1,5 @@
 class SubsController < ApplicationController
+  before_action :require_login, except: [:index, :show]
   before_action :require_moderator, only: [:edit, :update]
 
   def index
@@ -27,7 +28,7 @@ class SubsController < ApplicationController
   end
 
   def update
-    @sub = Sub.find(params[:id])
+    @sub = current_user.subs.find_by_id(params[:id])
 
     if @sub.update(sub_params)
       flash[:notices] = ["Successfully updated #{@sub.title}!"]

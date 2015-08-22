@@ -47,4 +47,10 @@ module ApplicationHelper
     html += "</ul>"
     html.html_safe
   end
+
+  def back_to_frontpage
+    <<-HTML.html_safe
+      <a href="#{subs_url}">Back to Frontpage</a>
+    HTML
+  end
 end

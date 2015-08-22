@@ -1,4 +1,6 @@
 class PostsController < ApplicationController
+  before_action :require_login, except: :show
+  before_action :require_author, only: [:edit, :update]
 
   def new
     @post = Post.new
@@ -23,6 +25,12 @@ class PostsController < ApplicationController
   private
 
   def post_params
-    params.require(:post).permit(:title, :content, :url, :sub_ids => [])
+    params.require(:post)
+      .permit(:title, :content, :url, :sub_ids => [])
+  end
+
+  def require_author
+    @post = Post.find(params[:sub_id])
+    redirect_to sub_url(@post) if current_user != @post.author
   end
 end
