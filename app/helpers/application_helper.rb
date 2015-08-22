@@ -50,7 +50,7 @@ module ApplicationHelper
 
   def back_to_frontpage
     <<-HTML.html_safe
-      <a href="#{subs_url}">Back to Frontpage</a>
+      <a href="#{subs_url}">Frontpage</a>
     HTML
   end
 end

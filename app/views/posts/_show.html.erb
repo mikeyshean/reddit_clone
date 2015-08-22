@@ -1,0 +1,9 @@
+<h1><%= post.title %></h1>
+<h4><%= post.author %></h4>
+
+<a href="<%= post.url %>"><%= post.url %></a><br>
+<%= post.content %>
+<br>
+<p>Posted by: <%= post.author %><br>
+<%= time_ago_in_words(post.created_at) %> ago
+</p>

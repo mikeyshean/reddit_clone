@@ -1,0 +1,10 @@
+<%= render "posts/show", post: @parent_comment.post %>
+
+<%= @parent_comment.content %>
+<br>
+<p>Posted by: <%= @parent_comment.author %><br>
+<%= time_ago_in_words(@parent_comment.created_at) %> ago
+</p>
+
+Reply:
+<%= render "form", comment: @child_comment %>
