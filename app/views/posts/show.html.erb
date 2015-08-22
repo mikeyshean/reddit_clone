@@ -1,11 +1,11 @@
 <%= render "show", post: @post %>
+
 <% if @post.author == current_user %>
   <a href="<%= edit_post_url(@post) %>">Edit</a><br>
 <% end %>
+
 <a href="<%= new_post_comment_url(@post) %>">Comment</a><br>
+
 <%= flash_messages %>
-<ul>
-  <% @post.comments.each do |comment| %>
-    <li><a href="<%= comment_url(comment) %>"><%= comment.content %></a></li>
-  <% end %>
-</ul>
+
+<%= render "comments", comments: @post.top_level_comments %>

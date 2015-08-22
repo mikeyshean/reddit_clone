@@ -9,4 +9,8 @@ class Post < ActiveRecord::Base
   has_many :post_subs, inverse_of: :post
   has_many :subs, through: :post_subs
   has_many :comments
+
+  def top_level_comments
+    self.comments.where(parent_comment_id: nil)
+  end
 end
