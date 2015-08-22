@@ -1,0 +1,22 @@
+<form action="<%= action_text %>" method="post">
+  <%= authenticity_token %>
+
+  <label for="username">Username: </label>
+  <br>
+  <input
+    type="text"
+    name="user[username]"
+    id="username"
+    <%= "value=#{user.username}" if button_text == "Create" %>>
+  <br>
+
+  <label for="user_password">Password: </label>
+  <br>
+  <input
+    type="password"
+    name="user[password]"
+    id="user_password">
+  <br>
+
+  <button><%= button_text %></button>
+</form>
