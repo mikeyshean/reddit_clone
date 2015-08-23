@@ -9,7 +9,7 @@ class UsersController < ApplicationController
 
     if @user.save
       log_in_user!(@user)
-      render text: "Successful login, #{@user.username}"
+      redirect_to subs_url
     else
       flash.now[:errors] = @user.errors.full_messages
       render :new

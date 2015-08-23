@@ -46,7 +46,7 @@ class PostsController < ApplicationController
   end
 
   def require_author
-    @post = Post.find(params[:id])
-    redirect_to sub_url(@post) if current_user != @post.author
+    post = Post.find(params[:id])
+    redirect_to sub_url(post) if current_user != post.author
   end
 end

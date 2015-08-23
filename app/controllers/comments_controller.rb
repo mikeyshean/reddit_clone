@@ -10,18 +10,11 @@ class CommentsController < ApplicationController
   def create
     @comment = current_user.comments.new(comment_params)
 
-    redirect_url =
-      if @comment.parent_comment_id.nil?
-        post_url(@comment.post)
-      else
-        comment_url(@comment.parent_comment_id)
-      end
-
     if @comment.save
       redirect_to comment_url(@comment)
     else
-      flash.now[:errors] = @comment.errors.full_messages
-      redirect_to redirect_url
+      flash[:notices] = @comment.errors.full_messages
+      redirect_to new_post_comment_url(@comment.post_id)
     end
   end
 
