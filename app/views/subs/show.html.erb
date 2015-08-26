@@ -6,7 +6,19 @@
 
 <ul>
   <% @sub.posts.each do |post| %>
-    <li><a href="<%= post_url(post) %>"><%= post.title %></a></li>
+    <li>(<%= post.comment_total %>)
+      <form action="<%= upvote_post_url(post) %>" method="post">
+        <%= authenticity_token %>
+        <button>+</button>
+      </form>
+
+      <form action="<%= downvote_post_url(post) %>" method="post">
+        <%= authenticity_token %>
+        <input type="hidden" name="sub_id" value="<%= params[:id] %>">
+        <button>-</button>
+      </form>
+
+      <a href="<%= post_url(post) %>"><%= post.title %></a></li>
   <% end %>
 </ul>
 

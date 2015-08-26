@@ -4,8 +4,14 @@
   <a href="<%= edit_post_url(@post) %>">Edit</a><br>
 <% end %>
 
-<a href="<%= new_post_comment_url(@post) %>">Comment</a><br>
+<form action="<%= post_url(@post) %>" method="post">
+  <%= authenticity_token %>
+  <%= hidden_delete %>
+  <input type="hidden" name="sub_id" value=""
+  <button>Delete</button>
+</form>
 
+<a href="<%= new_post_comment_url(@post) %>">Comment</a><br>
 <%= flash_messages %>
 
 <% @comments_by_parent_id[nil].each do |c1| %>

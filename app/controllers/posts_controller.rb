@@ -38,6 +38,24 @@ class PostsController < ApplicationController
     end
   end
 
+  def destroy
+    @post = Post.find(params[:id])
+    @post.destroy
+    redirect_to subs_url
+  end
+
+  def upvote
+    @post = Post.find(params[:id])
+    vote = @post.votes.create(value: 1)
+    redirect_to sub_url(params[:sub_id])
+  end
+
+  def downvote
+    @post = Post.find(params[:id])
+    vote = @post.votes.create(value: -1)
+    redirect_to sub_url(params[:sub_id])
+  end
+
   private
 
   def post_params
