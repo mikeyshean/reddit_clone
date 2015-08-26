@@ -17,8 +17,14 @@ class Post < ActiveRecord::Base
 
   def comments_by_parent_id
     result = Hash.new { |h,k| h[k] = [] }
+    join_votes = "LEFT OUTER JOIN votes ON (votes.votable_id = comments.id \
+     AND votes.votable_type = 'Comment')"
 
-    self.comments.includes(:author).each do |comment|
+    self.comments
+    .joins(join_votes)
+    .group("comments.id")
+    .order("COALESCE(SUM(votes.value), 0) DESC")
+    .includes(:author).each do |comment|
       result[comment.parent_comment_id] << comment
     end
 

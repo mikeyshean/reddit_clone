@@ -41,9 +41,14 @@ class SubsController < ApplicationController
 
   def show
     @sub = Sub.find(params[:id])
-    @posts = @sub.posts.joins(:votes)
+    join_votes = "LEFT OUTER JOIN votes ON votes.votable_id = posts.id \
+     AND votes.votable_type = 'Post'"
+
+    @posts = @sub.posts
+      .joins(join_votes)
       .group("posts.id")
-      .order("SUM(votes.value) DESC")
+      .order("COALESCE(SUM(votes.value), 0) DESC")
+
     render :show
   end
 

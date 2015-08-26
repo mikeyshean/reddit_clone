@@ -7,13 +7,13 @@
 <form action="<%= post_url(@post) %>" method="post">
   <%= authenticity_token %>
   <%= hidden_delete %>
-  <input type="hidden" name="sub_id" value=""
+  <input type="hidden" name="sub_id" value="">
   <button>Delete</button>
 </form>
 
 <a href="<%= new_post_comment_url(@post) %>">Comment</a><br>
 <%= flash_messages %>
 
-<% @comments_by_parent_id[nil].sort_by { |comment| comment.vote_total }.reverse.each do |c1| %>
-  <%= render "comments", { :c1 => c1, comments_by_parent_id: @comments_by_parent_id } %>
+<% @comments_by_parent_id[nil].each do |top_level_comment| %>
+  <%= render "comments", { :comment => top_level_comment, comments_by_parent_id: @comments_by_parent_id } %>
 <% end %>
