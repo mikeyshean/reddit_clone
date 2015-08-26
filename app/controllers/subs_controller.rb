@@ -46,7 +46,7 @@ class SubsController < ApplicationController
         ON votes.votable_id = posts.id \
         AND votes.votable_type = 'Post'"
 
-    @posts = @sub.posts
+    @posts = @sub.posts.includes(:votes)
       .joins(join_votes)
       .group("posts.id")
       .order("COALESCE(SUM(votes.value), 0) DESC")

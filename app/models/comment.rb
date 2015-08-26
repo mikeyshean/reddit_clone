@@ -21,7 +21,7 @@ class Comment < ActiveRecord::Base
   has_many :votes, as: :votable
 
   def vote_total
-    self.votes.sum(:value)
+    self.votes.inject(0) { |sum, vote| sum + vote.value }
   end
 
 end
