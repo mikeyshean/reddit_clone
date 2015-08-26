@@ -2,6 +2,17 @@
 
 <ul>
   <li><h5><%= c1.content %></h5><br>
+      (<%= c1.vote_total %>)
+       <form action="<%= upvote_comment_url(c1) %>" method="post">
+         <%= authenticity_token %>
+         <button>+</button>
+       </form>
+
+       <form action="<%= downvote_comment_url(c1) %>" method="post">
+         <%= authenticity_token %>
+         <input type="hidden" name="sub_id" value="<%= params[:id] %>">
+         <button>-</button>
+       </form>
      by <%= c1.author %><br>
     <%= time_ago_in_words(c1.created_at) %> ago <a href="<%= comment_url(c1) %>">Reply</a>
   </li>

@@ -33,7 +33,7 @@ class CommentsController < ApplicationController
     redirect_to post_url(@comment.post)
   end
 
-  def upvote
+  def downvote
     @comment = Comment.find(params[:id])
     vote = @comment.votes.create(value: -1)
     redirect_to post_url(@comment.post)

@@ -25,7 +25,7 @@ class Post < ActiveRecord::Base
     result
   end
 
-  def comment_total
+  def vote_total
     self.votes.sum(:value)
   end
 end

@@ -20,4 +20,8 @@ class Comment < ActiveRecord::Base
 
   has_many :votes, as: :votable
 
+  def vote_total
+    self.votes.sum(:value)
+  end
+
 end

@@ -14,6 +14,6 @@
 <a href="<%= new_post_comment_url(@post) %>">Comment</a><br>
 <%= flash_messages %>
 
-<% @comments_by_parent_id[nil].each do |c1| %>
+<% @comments_by_parent_id[nil].sort_by { |comment| comment.vote_total }.reverse.each do |c1| %>
   <%= render "comments", { :c1 => c1, comments_by_parent_id: @comments_by_parent_id } %>
 <% end %>

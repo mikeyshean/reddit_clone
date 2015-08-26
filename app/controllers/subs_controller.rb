@@ -41,6 +41,9 @@ class SubsController < ApplicationController
 
   def show
     @sub = Sub.find(params[:id])
+    @posts = @sub.posts.joins(:votes)
+      .group("posts.id")
+      .order("SUM(votes.value) DESC")
     render :show
   end
 
