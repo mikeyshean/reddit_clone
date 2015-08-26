@@ -9,6 +9,7 @@ class Post < ActiveRecord::Base
   has_many :post_subs, inverse_of: :post
   has_many :subs, through: :post_subs
   has_many :comments
+  has_many :votes, as: :votable
 
   def top_level_comments
     self.comments.where(parent_comment_id: nil)

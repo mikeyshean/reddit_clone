@@ -6,7 +6,7 @@ class Comment < ActiveRecord::Base
     :author,
     class_name: "User"
   )
-  
+
   belongs_to(
     :parent_comment,
     class_name: "Comment"
@@ -17,5 +17,7 @@ class Comment < ActiveRecord::Base
     class_name: "Comment",
     foreign_key: :parent_comment_id
   )
+
+  has_many :votes, as: :votable
 
 end

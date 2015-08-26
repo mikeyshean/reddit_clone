@@ -6,7 +6,16 @@ Rails.application.routes.draw do
   end
   resources :posts, except: [:index, :new] do
     resources :comments, only: :new
+    member do
+      post "upvote"
+      post "downvote"
+    end
   end
 
-  resources :comments, except: [:new]
+  resources :comments, except: [:new] do
+    member do
+      post "upvote"
+      post "downvote"
+    end
+  end
 end
