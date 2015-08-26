@@ -11,7 +11,7 @@ class CommentsController < ApplicationController
     @comment = current_user.comments.new(comment_params)
 
     if @comment.save
-      redirect_to comment_url(@comment)
+      redirect_to post_url(@comment.post)
     else
       flash[:notices] = @comment.errors.full_messages
       redirect_to new_post_comment_url(@comment.post_id)
