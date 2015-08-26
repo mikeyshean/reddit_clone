@@ -1,6 +1,6 @@
 class PostsController < ApplicationController
   before_action :require_login, except: :show
-  before_action :require_author, only: [:edit, :update]
+  before_action :require_author, only: [:edit, :update, :destroy]
 
   def new
     @post = Post.new(sub_ids: [params[:sub_id]])
@@ -39,20 +39,23 @@ class PostsController < ApplicationController
   end
 
   def destroy
-    @post = Post.find(params[:id])
-    @post.destroy
+    post = Post.find(params[:id])
+    post.destroy
+
     redirect_to subs_url
   end
 
   def upvote
-    @post = Post.find(params[:id])
-    vote = @post.votes.create(value: 1)
+    post = Post.find(params[:id])
+    post.votes.create(value: 1)
+
     redirect_to sub_url(params[:sub_id])
   end
 
   def downvote
-    @post = Post.find(params[:id])
-    vote = @post.votes.create(value: -1)
+    post = Post.find(params[:id])
+    post.votes.create(value: -1)
+
     redirect_to sub_url(params[:sub_id])
   end
 
@@ -65,6 +68,7 @@ class PostsController < ApplicationController
 
   def require_author
     post = Post.find(params[:id])
+
     redirect_to sub_url(post) if current_user != post.author
   end
 end

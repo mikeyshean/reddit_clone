@@ -28,15 +28,17 @@ class CommentsController < ApplicationController
   end
 
   def upvote
-    @comment = Comment.find(params[:id])
-    vote = @comment.votes.create(value: 1)
-    redirect_to post_url(@comment.post)
+    comment = Comment.find(params[:id])
+    comment.votes.create(value: 1)
+
+    redirect_to post_url(comment.post)
   end
 
   def downvote
-    @comment = Comment.find(params[:id])
-    vote = @comment.votes.create(value: -1)
-    redirect_to post_url(@comment.post)
+    comment = Comment.find(params[:id])
+    comment.votes.create(value: -1)
+
+    redirect_to post_url(comment.post)
   end
 
   private
@@ -47,7 +49,8 @@ class CommentsController < ApplicationController
   end
 
   def require_author
-    @comment = Comment.find(params[:id])
-    redirect_to comment_url(@comment) if @comment.author != current_user
+    comment = Comment.find(params[:id])
+    
+    redirect_to comment_url(comment) if comment.author != current_user
   end
 end

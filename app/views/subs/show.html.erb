@@ -1,5 +1,5 @@
-
 <%= flash_messages %>
+
 <h1><%= @sub.title %></h1>
 <h4><%= @sub.description %></h4>
 <h4>Moderator: <%= @sub.moderator %></h4>
@@ -7,6 +7,7 @@
 <ul>
   <% @posts.each do |post| %>
     <li>(<%= post.vote_total %>)
+
       <form action="<%= upvote_post_url(post) %>" method="post">
         <input type="hidden" name="sub_id" value="<%= params[:id] %>">
         <%= authenticity_token %>
@@ -24,6 +25,7 @@
 </ul>
 
 <a href="<%= new_sub_post_url(@sub) %>">New Post</a><br>
+
 <% if @sub.moderator == current_user %>
   <a href="<%= edit_sub_url(@sub) %>">Edit</a><br>
 <% end %>

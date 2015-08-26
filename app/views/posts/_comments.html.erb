@@ -1,8 +1,10 @@
-
-
 <ul>
-  <li><h5><%= comment.content %></h5><br>
+  <li>
+    <h5><%= comment.content %></h5>
+    <br>
+
       (<%= comment.vote_total %>)
+
        <form action="<%= upvote_comment_url(comment) %>" method="post">
          <%= authenticity_token %>
          <button>+</button>
@@ -13,8 +15,12 @@
          <input type="hidden" name="sub_id" value="<%= params[:id] %>">
          <button>-</button>
        </form>
+
      by <%= comment.author %><br>
-    <%= time_ago_in_words(comment.created_at) %> ago <a href="<%= comment_url(comment) %>">Reply</a>
+
+    <%= time_ago_in_words(comment.created_at) %> ago
+    <a href="<%= comment_url(comment) %>">Reply</a>
+
   </li>
     <% comments_by_parent_id[comment.id].each do |c2| %>
       <%= render "comments", { comment: c2, comments_by_parent_id: comments_by_parent_id } %>

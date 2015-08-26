@@ -1,6 +1,7 @@
 <h1>Edit <%= @post.title %></h1>
 
 <%= render "form", post: @post %>
+
 <form action="<%= sub_url(@post.sub_ids.first) %>" method="get">
   <button>Cancel</button>
 </form>

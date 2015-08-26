@@ -1,6 +1,8 @@
 <h1>Submit a Post!</h1>
+
 <%= flash_messages %>
 <%= render "form", post: @post %>
+
 <form action="<%= sub_url(params[:sub_id]) %>" method="get">
   <button>Cancel</button>
 </form>

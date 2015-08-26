@@ -15,5 +15,7 @@
 <%= flash_messages %>
 
 <% @comments_by_parent_id[nil].each do |top_level_comment| %>
-  <%= render "comments", { :comment => top_level_comment, comments_by_parent_id: @comments_by_parent_id } %>
+  <%= render "comments",
+  { :comment => top_level_comment,
+    comments_by_parent_id: @comments_by_parent_id } %>
 <% end %>
